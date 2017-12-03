@@ -1,0 +1,11 @@
+{
+  "name": "my-hapi-place",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/KeanuTomatoMomotaro/my-hapi-place.git",
+  "author": "Keanu Nurherbyanto <keanu.razgriz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.1.1"
+  }
+}
