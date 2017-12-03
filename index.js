@@ -8,7 +8,7 @@ const server = Hapi.server({
     port: 8000 
 });
 
-// Add the route
+// Add the route(s)
 server.route({
     method: 'GET',
     path:'/hello', 
@@ -18,6 +18,14 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path:'/{amount}',
+    handler: function (request, reply){
+        return 'Give me '+encodeURIComponent(request.params.amount)+' Cheeseburgers please!';
+    
+    }
+})
 // Start the server
 async function start() {
 
