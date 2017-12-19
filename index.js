@@ -2,6 +2,9 @@
 var fs = require('fs');
 const Hapi = require('hapi');
 var Jimp = require('jimp');
+var moment = require('moment');
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 //server stuff
 const server = Hapi.server({
@@ -16,6 +19,27 @@ server.route([
         handler: function (request, reply){
             return "Hello Motorola";
         }
+    },
+    {
+        method: 'GET',
+        path:'/create-token',
+        handler: function (request, reply) {
+            //sign with default HMAC SHA256
+            var jwt = require('jsonwebtoken');
+            var token = jwt.sign({secretKey: 'harambe'}, 'itsSsecret');
+            //backdate a jwt to 30 seconds
+            var old_token = jwt.sign({secretKey: 'harambe', iat: Math.floor(Date.now() / 1000) - 30 }, 'itsSsecret');
+            
+            //success
+            const response = reply.response({
+                _token: token,
+                _oldToken: old_token
+            });
+            //response type app / json
+            response.type('application/json');
+            
+            return response;
+        }  
     },
     {
         method: 'POST',
