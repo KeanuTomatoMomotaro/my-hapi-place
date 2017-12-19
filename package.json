@@ -6,6 +6,10 @@
   "author": "Keanu Nurherbyanto <keanu.razgriz@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "hapi": "^17.1.1"
+    "bcrypt": "^1.0.3",
+    "hapi": "^17.1.1",
+    "jimp": "^0.2.28",
+    "moment": "^2.20.1",
+    "mysql": "^2.15.0"
   }
 }

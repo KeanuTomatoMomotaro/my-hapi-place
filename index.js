@@ -1,35 +1,52 @@
 'use strict';
-
+var fs = require('fs');
 const Hapi = require('hapi');
+var mysql = require('mysql');
+var Jimp = require('jimp');
+var moment = require('moment');
+var bcrypt = require('bcrypt');
 
-// Create a server with a host and port
-const server = Hapi.server({ 
-    host: 'localhost', 
-    port: 8000 
+//server stuff
+const server = Hapi.server({
+    host: 'localhost',
+    port: 8000,
 });
 
-// Add the route
-server.route({
-    method: 'GET',
-    path:'/hello', 
-    handler: function (request, h) {
-
-        return 'MY NAME IS KHAN';
+//db mysql config, change later before merge
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'leantera_production_web_root'
+});
+//initiate connection to database
+connection.connect(function(err){
+    if(err){
+        console.log("failed to connect to database");
+        connection.end();
     }
 });
 
-// Start the server
-async function start() {
+server.route([
+    {
+        method: 'GET',
+        path: '/hello-motto',
+        handler: function (request, reply){
+            return "Hello Motorola";
+        }
+    },
+])
 
-    try {
+//start server
+async function start() {
+    try{
         await server.start();
     }
-    catch (err) {
+    catch(err) {
         console.log(err);
         process.exit(1);
     }
-
-    console.log('Server running at:', server.info.uri);
+    console.log('Server is running at:', server.info.uri);
 };
 
 start();
