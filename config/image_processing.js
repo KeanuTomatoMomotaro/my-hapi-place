@@ -2,6 +2,7 @@
 var fs = require('fs');
 var Jimp = require('jimp');
 
+
 module.exports = [
     {
         method: 'POST',
@@ -13,13 +14,14 @@ module.exports = [
                 parse: true
             },
             handler: function (request, reply) {
-                request.payload['image'].pipe(fs.createWriteStream("images/originals/originalImage.jpg"));
-                Jimp.read("images/originals/originalImage.jpg", function (err, image){
+                
+                request.payload['image'].pipe(fs.createWriteStream("../images/originals/originalImage.jpg"));
+                Jimp.read("../images/originals/originalImage.jpg", function (err, image){
                     if(err) throw err
                     image.resize(100,100)
                     .quality(60)
                     .greyscale()
-                    .write('images/blackAndWhite/blackAndWhite.jpg');
+                    .write('../images/blackAndWhite/blackAndWhite.jpg');
                 })
                 //success
                 const response = reply.response({
